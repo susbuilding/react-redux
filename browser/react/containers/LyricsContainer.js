@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import store from '../store';
 import Lyrics from '../components/Lyrics';
-
 import {searchLyrics} from '../action-creators/lyrics';
 import {connect} from 'react-redux'
 
@@ -11,8 +9,16 @@ function mapStateToProps(state){
   }
 }
 
+function mapDispatchToProps(dispatch){
+  return {
+    searchLyrics: function(){
+      dispatch(searchLyrics(artistQuery, songQuery))
+    }
+  }
+}
 
-export default connect(mapStateToProps)(
+
+export default connect(mapStateToProps, mapDispatchToProps)(
     class extends Component {
 
     constructor() {
@@ -41,7 +47,7 @@ export default connect(mapStateToProps)(
     handleSubmit(e) {
       e.preventDefault();
       if (this.state.artistQuery && this.state.songQuery) {
-        store.dispatch(searchLyrics(this.state.artistQuery, this.state.songQuery));
+        searchLyrics(this.state.artistQuery, this.state.songQuery);
       }
     }
 
