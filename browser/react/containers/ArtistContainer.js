@@ -3,7 +3,28 @@ import store from '../store';
 import Artist from '../components/Artist';
 
 import {toggleSong} from '../action-creators/player';
+import {connect} from 'react-redux';
 
+
+function mapStateToProps(state, ownProps){
+  return {
+    //{...state.player}, --> how do we do this?
+    selectedArtist: state.artists.selected,
+    children: ownProps.children
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return{
+    toggleOne: function(song, list){
+      dispatch(toggleSong(song, list))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Artist)
+
+/*
 export default class extends Component {
 
   constructor() {
@@ -35,4 +56,4 @@ export default class extends Component {
     );
   }
 
-}
+}*/
