@@ -13,7 +13,7 @@ function songsToStations(songs){
 }
 
 function mapStateToProps(state){
-  return{
+  return {
     stations: songsToStations(state.songs)
   }
 }
